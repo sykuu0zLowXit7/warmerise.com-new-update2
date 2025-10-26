@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://warmerise.com/login/return_url/64-Lw%3D%3D -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es" dir="ltr" slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--<base href="/">--><base href=".">
+
+  
+    
+
+      <title>Sign-in - Warmerise</title>
+  
+<meta http-equiv="Content-Language" content="es_US">
+<meta name="description" content="Warmerise - online first person shooter with futuristic theme. Play it for free inside your browser! This is the site sign-in page.">
+<meta name="keywords" content="NSdesignGames,Multiplayer,WebGL,FPS,Game,Unity,3D,Shooter,Sci-fi,warmerise,fps,HTML5,online,fun,casual,quick,play,now,free,to,play">
+
+
+      <link href="https://warmerise.com/favicon.ico?c=265" rel="favicon" type="image/x-icon">
+<link href="./Sign-in - Warmerise_files/a33d02b3ff92e689ec8e1f7b5a909fe9.css" media="screen" rel="stylesheet">
+<link href="https://warmerise.com/login/return_url/64-Lw%3D%3D" rel="canonical">
+  
+
+    
+    <script type="text/javascript">if (window.location.hash == '#_=_')window.location.hash = '';</script>
+  <script type="text/javascript">
+      </script>
+    <script type="text/javascript" src="./Sign-in - Warmerise_files/mootools-core-more-chootools-smoothbox4-combined.js.descarga"></script>
+<script type="text/javascript" src="./Sign-in - Warmerise_files/b982edfd968fe0bef84266a16707b8bf.js.descarga"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    
+    Date.setServerOffset('Sun, 26 Oct 2025 18:05:40 +0000');
+    
+    en4.orientation = 'ltr';
+    en4.core.environment = 'production';
+    en4.core.language.setLocale('es_US');
+    en4.core.setBaseUrl('/');
+    en4.core.staticBaseUrl = '/';
+    en4.core.loader = new Element('img', {src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
+    
+            if( false ) {
+      en4.core.runonce.add(function() {
+        en4.core.dloader.attach();
+      });
+    }
+    
+        //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    en4.core.language.addData({"Save":"Save","Cancel":"Cancel","delete":"delete"});    //]]>
+</script>
+
+  
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+</head>
+<body id="global_page_user-auth-login">
+    <div id="global_header">
+    <div class="layout_page_header">
+<div class="generic_layout_container layout_main">
+<div class="generic_layout_container layout_core_menu_mini">
+<div id="core_menu_mini_menu">
+    <ul>
+              <li><a href="https://warmerise.com/login/return_url/64-L2xvZ2luL3JldHVybl91cmwvNjQtTHclM0QlM0Q%3D" class="menu_core_mini core_mini_auth">Sign In</a></li>
+          <li><a href="https://warmerise.com/signup" class="menu_core_mini core_mini_signup">Sign Up</a></li>
+              <li id="global_search_form_container">
+        <form id="global_search_form" action="https://warmerise.com/search" method="get">
+          <input type="text" class="text suggested" name="query" id="global_search_field" size="20" maxlength="100" alt="Search"><label class="overTxtLabel" for="global_search_field" style="line-height: normal; position: absolute; cursor: text; left: 1329px; top: 30px;">Search</label>
+        </form>
+      </li>
+      </ul>
+</div>
+
+
+<script type="text/javascript">
+  var notificationUpdater;
+
+  en4.core.runonce.add(function(){
+    if($('global_search_field')){
+      new OverText($('global_search_field'), {
+        poll: true,
+        pollInterval: 500,
+        positionOptions: {
+          position: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
+          edge: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
+          offset: {
+            x: ( en4.orientation == 'rtl' ? -4 : 4 ),
+            y: 2
+          }
+        }
+      });
+    }
+
+    if($('notifications_markread_link')){
+      $('notifications_markread_link').addEvent('click', function() {
+        //$('notifications_markread').setStyle('display', 'none');
+        en4.activity.hideNotifications('0 Updates');
+      });
+    }
+
+      });
+
+
+  var toggleUpdatesPulldown = function(event, element, user_id) {
+    if( element.className=='updates_pulldown' ) {
+      element.className= 'updates_pulldown_active';
+      showNotifications();
+    } else {
+      element.className='updates_pulldown';
+    }
+  }
+
+  var showNotifications = function() {
+    en4.activity.updateNotifications();
+    new Request.HTML({
+      'url' : en4.core.baseUrl + 'activity/notifications/pulldown',
+      'data' : {
+        'format' : 'html',
+        'page' : 1
+      },
+      'onComplete' : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+        if( responseHTML ) {
+          // hide loading icon
+          if($('notifications_loading')) $('notifications_loading').setStyle('display', 'none');
+
+          $('notifications_menu').innerHTML = responseHTML;
+          $('notifications_menu').addEvent('click', function(event){
+            event.stop(); //Prevents the browser from following the link.
+
+            var current_link = event.target;
+            var notification_li = $(current_link).getParent('li');
+
+            // if this is true, then the user clicked on the li element itself
+            if( notification_li.id == 'core_menu_mini_menu_update' ) {
+              notification_li = current_link;
+            }
+
+            var forward_link;
+            if( current_link.get('href') ) {
+              forward_link = current_link.get('href');
+            } else{
+              forward_link = $(current_link).getElements('a:last-child').get('href');
+            }
+
+            if( notification_li.get('class') == 'notifications_unread' ){
+              notification_li.removeClass('notifications_unread');
+              en4.core.request.send(new Request.JSON({
+                url : en4.core.baseUrl + 'activity/notifications/markread',
+                data : {
+                  format     : 'json',
+                  'actionid' : notification_li.get('value')
+                },
+                onSuccess : function() {
+                  window.location = forward_link;
+                }
+              }));
+            } else {
+              window.location = forward_link;
+            }
+          });
+        } else {
+          $('notifications_loading').innerHTML = 'You have no new updates.';
+        }
+      }
+    }).send();
+  };
+
+  /*
+  function focusSearch() {
+    if(document.getElementById('global_search_field').value == 'Search') {
+      document.getElementById('global_search_field').value = '';
+      document.getElementById('global_search_field').className = 'text';
+    }
+  }
+  function blurSearch() {
+    if(document.getElementById('global_search_field').value == '') {
+      document.getElementById('global_search_field').value = 'Search';
+      document.getElementById('global_search_field').className = 'text suggested';
+    }
+  }
+  */
+</script></div>
+
+<div class="generic_layout_container layout_core_menu_logo">
+<a href="https://warmerise.com/"><img src="./Sign-in - Warmerise_files/5b9sw8.png" alt="Warmerise" width="284" height="84"></a></div>
+
+<div class="generic_layout_container layout_core_menu_main">
+<ul class="navigation">
+    <li>
+        <a class="menu_core_main core_main_home" href="https://warmerise.com/">Home</a>
+    </li>
+    <li>
+        <a class="menu_core_main custom_192" href="https://warmerise.com/pages/RedvsBlue">Play Now</a>
+    </li>
+    <li>
+        <a class="menu_core_main custom_193" href="https://warmerise.com/pages/top100">Top 100</a>
+    </li>
+    <li>
+        <a class="menu_core_main core_main_group" href="https://warmerise.com/groups">Clans</a>
+    </li>
+    <li>
+        <a class="menu_core_main core_main_poll" href="https://warmerise.com/polls">Polls</a>
+    </li>
+    <li>
+        <a class="menu_core_main core_main_video" href="https://warmerise.com/videos">Videos</a>
+    </li>
+    <li>
+        <a class="menu_core_main core_main_forum" href="https://warmerise.com/forums">Forum</a>
+    </li>
+</ul></div>
+
+<div class="generic_layout_container layout_seaocore_seaocores_lightbox"><div style="display: none;">
+<style type="text/css">
+  .photo_lightbox_left, 
+  .seaocore_lightbox_image_content {background:#0c0c0c;}
+  .seaocore_lightbox_user_options{background:#0c0c0c;}
+  .seaocore_lightbox_user_right_options{background:#0c0c0c;}
+  .seaocore_lightbox_photo_detail{background:#0c0c0c;}
+  .seaocore_lightbox_user_options a,
+  .seaocore_lightbox_photo_detail,
+  .seaocore_lightbox_photo_detail a{color:#FFFFFF;}
+</style> 
+</div>
+<div class="photo_lightbox" id="seaocore_photo_lightbox" style="display: none;"> 
+   </div>
+<script type="text/javascript">
+  var activityfeed_lightbox = '1';
+  var flag = '0';
+</script>
+<div class="photo_lightbox" id="album_light" style="display: none;"></div>
+</div>
+
+<div class="generic_layout_container layout_core_html_block">
+<style>
+.forum_topic_posts img {
+max-width: 100%;
+height: auto;
+}
+
+div.albums_viewmedia, div.albums_viewmedia #media_photo {
+max-width: 100%;
+}
+div.albums_viewmedia_info {
+border: 1px solid #fdfdfd;
+}
+.youtube_iframe_big {
+    width: 874px;
+    height: 490px;
+}
+.layout_video_show_same_tags .timestamp, .layout_video_show_also_liked .timestamp,
+.layout_video_show_same_poster .timestamp {
+	display: none
+}
+
+ul.feed .feed_item_link_desc span {
+color: #232723;
+}
+
+#messages_form_reply .form-elements {
+padding: 10px;
+background: #eaeaea;
+}
+#messages_form_reply .compose-content {
+background: #fff;
+border-radius: 0;
+}
+
+.layout_core_menu_main > ul > li a {
+font-weight: bold;
+}
+.fc-consent-root .fc-button:focus .fc-button-label {
+outline: 0 !important;
+}
+
+.layout_core_menu_main > ul > li:not(.active) a:not(:hover):link, .layout_core_menu_main > ul > li:not(.active) a:not(:hover):visited, .layout_core_menu_mini #core_menu_mini_menu>ul>li>a {
+color: #4b4b4e;
+}
+#core_menu_mini_menu .overTxtLabel {
+color: #656668;
+}
+.layout_gamestreamhome_signup .global_form button, .layout_gamestreamhome_signup .global_form button:hover {
+color: #1B2234;
+}
+</style></div>
+
+<div class="generic_layout_container layout_side_ads">		        
+                    <!-- Quick Play Button -->
+            <style>
+                #floating_game_window {
+                    background: gray;
+                    display: block;
+                    position: fixed;
+                    left: 10px;
+                    top: 10px;
+                    overflow: hidden;
+                    /*border-radius: 3px;
+                    border: 1px solid #a1a1a1;
+                    box-shadow: 0px 1px 4px rgb(16 16 17 / 50%);*/
+                    z-index: 111;
+                    box-sizing: border-box;
+                }
+                
+                #floating_game_window #window_panel {
+                    display: block;
+                    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ebebeb, color-stop(1, #d5d5d5)));
+                    background: -webkit-linear-gradient(top, #ebebeb, #d5d5d5);
+                    background: -moz-linear-gradient(top, #ebebeb, #d5d5d5);
+                    background: -ms-linear-gradient(top, #ebebeb, #d5d5d5);
+                    background: -o-linear-gradient(top, #ebebeb, #d5d5d5);
+                    background: linear-gradient(top, #ebebeb, #d5d5d5);*/
+                    padding: 6px;
+                    /*overflow: hidden;*/
+                    /*border-bottom: 1px solid #a1a1a1;*/
+                    /*border-bottom: 1px solid #c4c4c4;*/
+                    -webkit-user-select: none; /* Safari */
+                    -ms-user-select: none; /* IE 10 and IE 11 */
+                    user-select: none; /* Standard syntax */
+                    box-sizing: border-box;
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    top: 0;
+                    transition: top 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+                    background: rgba(0, 0, 0, 0.5);
+                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 75%, transparent);
+                    /*border-bottom: 1px solid rgb(0.2274, 0.2274, 0.2274, 0.34);*/
+                }
+
+                #floating_game_window #window_panel #window_title {
+                    /*color: #4d494d;*/
+                    color: #dfdfdf;
+                    font-size: 14px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    left: 0;
+                    top: 0;
+                    line-height: 21px;
+                }
+                
+                /*#floating_game_window #window_panel:hover {
+                    cursor: move;
+                }*/
+                
+                #floating_game_window #window_panel .window-panel-button {
+                    background: #ff5c5c;
+                    display: table;
+                    width: 15px;
+                    height: 15px;
+                    text-align: center;
+                    border-radius: 100%;
+                    color: #1a1a1a;
+                    margin-right: 3px;
+                    display: inline-block;
+                    vertical-align: top;
+                    position: relative;
+                    z-index: 1;
+                    margin-top: -3px;
+                }
+                
+                #floating_game_window #window_panel .window-panel-button span {
+                    display: block;
+                    font-size: 11px;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 15px;
+                }
+                
+                #floating_game_window #window_panel .window-panel-button:hover {
+                    cursor: pointer;
+                }
+                
+                #floating_game_window #window_panel .window-panel-button:hover span {
+                    display: block;
+                }
+                
+                #floating_game_window #game_area {
+                    width: /*1000px*/ 100%;
+                    height: 600px;
+                    box-sizing: border-box;
+                }
+                
+                #media_area {
+                    height: 90px;
+                    width: 100%;
+                    /*background: #f5f5f5;*/
+                    display: block;
+                    box-sizing: border-box;
+                    position: absolute;
+                    top: 0;
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+                
+                #media_area:hover {
+                    opacity: 1;
+                }
+                
+                #media_area a {
+                    pointer-events: all;
+                }
+                
+                #media_area .media-close-button:hover {
+                    cursor: pointer;
+                }
+            </style>
+         
+            <div id="floating_game_window" style="display: none;">
+                <div id="window_panel">
+                    <div class="window-panel-button" title="Close" onclick="CloseGameWindow();"><span>✖</span></div>
+                    <div id="window_title">Warmerise | Red vs Blue</div>
+                    <div id="window_panel_hover_target" style="position: absolute; display: block; width: 100%; height: 5px; left: 0; bottom: -5px;"></div>
+                </div>
+                <div id="game_area">
+                
+                </div>
+                <div id="media_area">
+                
+                </div>
+            </div>
+            
+            <script>
+                function ResizeGameWindow(){
+                    if(game_iframe == null)
+                        return;
+                    
+                    floating_game_window.style.left = 0;
+                    floating_game_window.style.top = 0;
+                    floating_game_window.style.width = window.innerWidth + "px";
+                    floating_game_window.style.height = window.innerHeight + "px";
+                    game_area.style.height = (floating_game_window.clientHeight/* - window_panel.offsetHeight*//* - media_area.offsetHeight*/)  + "px";
+                }
+                
+                window.addEventListener("resize", ResizeGameWindow);
+                
+                function FetchMedia(){
+                    /*if(mediaRequestsToOmit > 0){
+                        mediaRequestsToOmit--;
+                        return;
+                    }
+                    fetch('/Warmerise/Request/?action_local=request&pool_id=82206')
+                        .then(res => res.json())
+                        .then((out) => {
+                            if(out.error == ""){
+                                media_area.innerHTML = "";
+                                var a = document.createElement('a');
+                                a.href = out.click_url;
+                                a.style.cssText = "width:" + out.image_width + "px; height:" + out.image_height + "px; background:" + "url('" + out.image_url + "'); background-repeat:no-repeat; background-size:contain; display:table; margin:0 auto; position: relative; border-radius: 0 0 3px 3px;";
+                                a.target = '_blank';
+                                var close_button = document.createElement('div');
+                                close_button.title = "Close Ad";
+                                close_button.className = "media-close-button";
+                                close_button.style.cssText = 'display: block; width: 15px; height: 15px; box-sizing: border-box; border-radius: 100%; border: 1px solid #f5f5f5; color: #f5f5f5; text-align: center; position: absolute; bottom: 0; right: 0;';
+                                close_button.innerHTML = '<span style="font-size: 10px; line-height: 13px; display: block; width: 13px; height: 13px;">&#10006;</span>';
+                                close_button.onclick = function(e) {
+                                    e.preventDefault();
+                                    media_area.innerHTML = "";
+                                    mediaRequestsToOmit = 30;
+                                };
+                                a.appendChild(close_button);
+                                media_area.appendChild(a);
+                            }
+                    }).catch(err => console.error(err));*/
+                }
+                
+                //Dragable window
+                var floating_game_window = document.getElementById("floating_game_window");
+                var window_panel = document.getElementById("window_panel");
+                var game_area = document.getElementById("game_area");
+                var media_area = document.getElementById("media_area");
+                var window_title = document.getElementById("window_title");
+                var game_iframe = null;
+                var store_title = "";
+                var ad_interval = null;
+                var mediaRequestsToOmit = 0;
+                var onPanelMouseLeaveTimeout = null;
+                
+                window_panel.onmouseenter = function(){
+                    OnPanelMouseEnter(this);
+                };
+                function OnPanelMouseEnter(el){
+                    el.style.top = 0;
+                    if(onPanelMouseLeaveTimeout != null){
+                        clearTimeout(onPanelMouseLeaveTimeout);
+                        onPanelMouseLeaveTimeout = null;
+                    }
+                }
+                window_panel.onmouseleave = function(){
+                    OnPanelMouseLeave(this, 1000);
+                };
+                function OnPanelMouseLeave(el, delay){
+                    onPanelMouseLeaveTimeout = setTimeout(function() { el.style.top = "-" + el.offsetHeight + "px"; }, /*2500*/ delay);
+                }
+
+                //dragElement(floating_game_window);
+                
+                function dragElement(elmnt, drag_elemnt, callback = null) {
+                    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                    var startX = 0, startY = 0;
+                    /*if (document.getElementById(/*elmnt.id + "header"* / "window_panel")) {
+                        // if present, the header is where you move the DIV from:
+                        document.getElementById(/*elmnt.id + "header"* / "window_panel").onmousedown = dragMouseDown;
+                    } else {
+                        // otherwise, move the DIV from anywhere inside the DIV:
+                        elmnt.onmousedown = dragMouseDown;
+                    }*/
+                    
+                    drag_elemnt.onmousedown = dragMouseDown;
+
+                    function dragMouseDown(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        // get the mouse cursor position at startup:
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        startX = e.clientX;
+                        startY = e.clientY;
+                        document.onmouseup = closeDragElement;
+                        // call a function whenever the cursor moves:
+                        document.onmousemove = elementDrag;
+                    }
+
+                    function elementDrag(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        // calculate the new cursor position:
+                        pos1 = pos3 - e.clientX;
+                        pos2 = pos4 - e.clientY;
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        // set the element's new position:
+                        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                    }
+
+                    function closeDragElement() {
+                        if(callback != null){
+                            callback(startX, startY, pos3, pos4);
+                        }
+                        // stop moving when mouse button is released:
+                        document.onmouseup = null;
+                        document.onmousemove = null;
+                    }
+                }
+                
+                function OpenGameWindow(){
+                    if(game_iframe == null){
+                        game_iframe = document.createElement('iframe');
+                        game_iframe.src = "/Warmerise/ProductionWebGL/PlayerData/?v=5.0.9&DisablePreloader=0";
+                        game_iframe.style.width = "100%";
+                        game_iframe.style.height = "100%";
+                        game_iframe.style.border = "0";
+                        game_iframe.setAttribute("scrolling", "no");
+                        game_area.appendChild(game_iframe);
+                        
+                        //mediaRequestsToOmit = 0;
+
+                        var game_panel_info_key = "wm_game_panel_info";
+                        OnPanelMouseEnter(window_panel);
+                        OnPanelMouseLeave(window_panel, sessionStorage.getItem(game_panel_info_key) === null ? 2000 : 1000);
+                        if (sessionStorage.getItem(game_panel_info_key) === null) {
+                            
+                            sessionStorage.setItem(game_panel_info_key, "1");
+                        }
+                    }
+                    
+                    floating_game_window.style.display = "block";
+                    /*var height_tmp = floating_game_window.offsetHeight;
+                    var width_tmp = floating_game_window.offsetWidth;
+                    floating_game_window.style.left = (window.innerWidth/2 - width_tmp/2) + "px";
+                    floating_game_window.style.top = (window.innerHeight/2 - height_tmp/2) + "px";*/
+                    ResizeGameWindow();
+                    
+                    if(store_title == ""){
+                        store_title = document.title;
+                    }
+                    
+                    document.title = "(Playing) " + store_title;
+                    
+                    media_area.innerHTML = "";
+                    
+                    setTimeout(FetchMedia, 20000);
+                    if(ad_interval != null){
+                        clearInterval(ad_interval);
+                        //ad_interval = null;
+                    }
+                    ad_interval = setInterval(FetchMedia, 120000); //1min. = 60000 milliseconds
+                    
+                    document.body.style.overflow = "hidden";
+                }
+                
+                function CloseGameWindow(){
+                    if(!confirm("Close the game?"))
+                        return;
+                    
+                    if(game_iframe != null){
+                        game_iframe.remove();
+                        game_iframe = null;
+                    }
+                    
+                    floating_game_window.style.display = "none";
+                    
+                    document.title = store_title;
+                    
+                    document.body.style.overflow = null;
+                    
+                    if(ad_interval != null){
+                        clearInterval(ad_interval);
+                        ad_interval = null;
+                    }
+                }
+            </script>
+            
+                        
+            <style>
+                #floating_play_button { height: 60px; width: 60px; position: fixed; border-radius: 30px; overflow: hidden; box-shadow: 0px 1px 4px rgba(16, 16, 17, 0.5); -webkit-user-select: none; -ms-user-select: none; user-select: none; z-index: 44; }
+                
+                #floating_play_button:active { margin-bottom: -1px; }
+                
+                #floating_play_button:hover { cursor: pointer; }
+                
+                #floating_play_button .button_icon { width: 50px; height: 50px; border-radius: 100%; position: absolute; left: 5px; top: 5px; overflow: hidden; background: #0e0e0f; }
+                
+                #floating_play_button .button_icon img { width: 50px; height: 50px; transition: scale 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); }
+                
+                #floating_play_button_drag_target { position: absolute; height: 100%; width: 20px; z-index: 1; left: 0; top: 0;}
+                
+                #floating_play_button_drag_target:hover { cursor: move; }
+                
+                #background_gradient { background: rgb(63,94,251); background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); height: 100%; width: 157px; position: absolute; left: 0; top: 0; z-index: -1; }
+                
+                #floating_play_button_text { display: block; line-height: 60px; color: #fbf5ff; font-size: 14px; margin-left: 60px; transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; position: absolute; white-space: nowrap; text-transform: uppercase; }
+                
+                .active #floating_play_button_text { opacity: 1; }
+                #floating_play_button.hower .button_icon img { scale: 107%; }
+            </style>
+            
+            <div id="floating_play_button" style="transition: width 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); right: 20px; bottom: 20px;">
+                <div id="floating_play_button_drag_target"></div>
+                <div id="background_gradient" style="width: 143px;"></div>
+                <div class="button_icon" id="button_icon"><img src="./Sign-in - Warmerise_files/GameIcon_small.jpg" alt="Warmerise Game Icon"></div>
+                <div id="floating_play_button_text">Play Now</div>
+            </div>
+            
+            <script>
+                var floating_play_button = document.getElementById("floating_play_button");
+                var background_gradient = document.getElementById("background_gradient");
+                var floating_play_button_text = document.getElementById("floating_play_button_text");
+                var button_drag_target = document.getElementById("floating_play_button_drag_target");
+                
+                document.getElementById("background_gradient").style.width = (60 + floating_play_button_text.offsetWidth + 10) + 'px';
+                
+                var cornet_storage_key = "wm_quick_play_button_settings";
+                var floating_button_info_expand_key =  "wm_quick_play_button_info";
+                var corner = 1; //1 = bottom right, 2 = top right, 3 = top left, 4 = bottom left
+                if (localStorage.getItem(cornet_storage_key) !== null) {
+                    var str_tmp = localStorage.getItem(cornet_storage_key);
+                    if(str_tmp.length > 0) {
+                        if (!isNaN(str_tmp)) {
+                            corner = parseInt(str_tmp);
+                        }
+                    }
+                }
+                SetFloatingButtonCorner(corner, false);
+                
+                floating_play_button.onmouseenter = function(){
+                    FloatingButtonMouseHover(this);
+                };
+                function FloatingButtonMouseHover(el){
+                    el.className='active hower'; 
+                    el.style.width = (60 + floating_play_button_text.offsetWidth + 10) + 'px';
+                }
+                floating_play_button.onmouseleave = function(){
+                    FloatingButtonMouseLeave(this);
+                };
+                function FloatingButtonMouseLeave(el){
+                    el.className=''; 
+                    el.style.width = null;
+                }
+                floating_play_button.onclick = function(e){
+                    if(e.target == button_drag_target)
+                        return;
+                    //window.open('https://warmerise.com/pages/RedvsBlue', '_top');
+                    OpenGameWindow();
+                };
+                
+                if (localStorage.getItem(floating_button_info_expand_key) === null) {
+                    FloatingButtonMouseHover(floating_play_button);
+                    setTimeout(function() { FloatingButtonMouseLeave(floating_play_button); }, 2500);
+                    
+                    localStorage.setItem(floating_button_info_expand_key, "1");
+                }
+                
+                dragElement(floating_play_button, button_drag_target, FloatingButtonDragCallback);
+                
+                function SetFloatingButtonCorner(corner_id, animate){
+                    floating_play_button.style.transition = "width 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),top 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),left 0.25s cubic-bezier(0.22, 0.61, 0.36, 1)";
+                                    
+                    floating_play_button.style.left = null;
+                    floating_play_button.style.top = null;
+                    floating_play_button.style.right = null;
+                    floating_play_button.style.bottom = null;
+                    
+                    if(animate){
+                        if(corner_id == 1){
+                            floating_play_button.style.top = "calc(100% - 80px)";  
+                            floating_play_button.style.left = "calc(100% - 80px)"; 
+                        }
+                        else if(corner_id == 2){
+                            floating_play_button.style.top = "20px";  
+                            floating_play_button.style.left = "calc(100% - 80px)"; 
+                        }
+                        else if(corner_id == 3){
+                            floating_play_button.style.top = "20px";    
+                            floating_play_button.style.left = "20px"; 
+                        }
+                        else if(corner_id == 4){
+                            floating_play_button.style.top = "calc(100% - 80px)";  
+                            floating_play_button.style.left = "20px";
+                        }
+                            
+                        setTimeout(function() {                    
+                            SetFloatingButtonCornerBase(corner_id);
+                        }, 300);
+                    }else{
+                        SetFloatingButtonCornerBase(corner_id);
+                    }
+                }
+                
+                function SetFloatingButtonCornerBase(corner_id){
+                    floating_play_button.style.left = null;
+                    floating_play_button.style.top = null;
+                    floating_play_button.style.right = null;
+                    floating_play_button.style.bottom = null;
+                    
+                    if(corner_id == 1){
+                        floating_play_button.style.right = "20px";  
+                        floating_play_button.style.bottom = "20px"; 
+                    }
+                    else if(corner_id == 2){
+                        floating_play_button.style.right = "20px";  
+                        floating_play_button.style.top = "20px"; 
+                    }
+                    else if(corner_id == 3){
+                        floating_play_button.style.left = "20px";  
+                        floating_play_button.style.top = "20px"; 
+                    }
+                    else if(corner_id == 4){
+                        floating_play_button.style.left = "20px";  
+                        floating_play_button.style.bottom = "20px"; 
+                    }
+                    
+                    floating_play_button.style.transition = "width 0.25s cubic-bezier(0.22, 0.61, 0.36, 1)";
+                }
+                
+                function FloatingButtonDragCallback(startX, startY, endX, endY){
+                    //console.log(startX, startY, endX, endY, corner);
+                    
+                    var threshold = 24;
+                    
+                    //Diagonal
+                    if(Math.abs(endY - startY) > threshold * 1.5 && Math.abs(endX - startX) > threshold * 1.5){
+                        var differenceX = endX - startX;
+                        if(corner == 1 && differenceX < 0){
+                            corner = 3;
+                        }
+                        else if(corner == 3 && differenceX > 0){
+                            corner = 1;
+                        }
+                        else if(corner == 2 && differenceX < 0){
+                            corner = 4;
+                        }
+                        else if(corner == 4 && differenceX > 0){
+                            corner = 2;
+                        }
+                    }
+                    else if(Math.abs(endY - startY) > threshold){
+                        var differenceY = endY - startY;
+                        if(corner == 1 && differenceY < 0){
+                            corner = 2;
+                        }
+                        else if(corner == 2 && differenceY > 0){
+                            corner = 1;
+                        }
+                        else if(corner == 3 && differenceY > 0){
+                            corner = 4;
+                        }
+                        else if(corner == 4 && differenceY < 0){
+                            corner = 3;
+                        }
+                    }
+                    else if(Math.abs(endX - startX) > threshold){
+                        var differenceX = endX - startX;
+                        if(corner == 1 && differenceX < 0){
+                            corner = 4;
+                        }
+                        else if(corner == 2 && differenceX < 0){
+                            corner = 3;
+                        }
+                        else if(corner == 4 && differenceX > 0){
+                            corner = 1;
+                        }
+                        else if(corner == 3 && differenceX > 0){
+                            corner = 2;
+                        }
+                    }
+                    
+                    localStorage.setItem(cornet_storage_key, corner.toString());
+
+                    SetFloatingButtonCorner(corner, true);
+                }
+            </script>
+            </div>
+</div>
+</div>
+  </div>
+  <div id="global_wrapper">
+    <div id="global_content">
+            <div class="layout_page_user_auth_login">
+<div class="generic_layout_container layout_main">
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
+<form id="user_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="https://warmerise.com/login" method="post"><div><div><h3>Member Sign In</h3>
+<p class="form-description">If you already have an account, please enter your details below. If you don't have one yet, please <a href="https://warmerise.com/signup">sign up</a> first.</p>
+<div class="form-elements">
+<div id="qljjTGJ82p-wrapper" class="form-wrapper"><div id="qljjTGJ82p-label" class="form-label"><label for="qljjTGJ82p" class="required">Email Address</label></div>
+<div id="qljjTGJ82p-element" class="form-element">
+<input type="email" name="qljjTGJ82p" id="qljjTGJ82p" value="" class="text" tabindex="1" autofocus="autofocus"></div></div>
+<div id="password-wrapper" class="form-wrapper"><div id="password-label" class="form-label"><label for="password" class="required">Password</label></div>
+<div id="password-element" class="form-element">
+<input type="password" name="password" id="password" value="" tabindex="2"></div></div>
+<div class="form-wrapper" id="buttons-wrapper"><fieldset id="fieldset-buttons">
+<div id="submit-wrapper" class="form-wrapper"><div id="submit-label" class="form-label">&nbsp;</div><div id="submit-element" class="form-element">
+<button name="submit" id="submit" type="submit" tabindex="3">Sign In</button></div></div>
+<div id="remember-wrapper" class="form-wrapper"><div class="form-label" id="remember-label">&nbsp;</div>
+<div id="remember-element" class="form-element">
+<input type="hidden" name="remember" value=""><input type="checkbox" name="remember" id="remember" value="1" tabindex="4">
+<label for="remember" class="optional">Remember Me</label></div></div></fieldset></div>
+<div id="forgot-wrapper" class="form-wrapper"><div id="forgot-label" class="form-label">&nbsp;</div>
+<div id="forgot-element" class="form-element"><span><a href="https://warmerise.com/user/auth/forgot">Forgot Password?</a></span></div></div>
+
+<input type="hidden" name="return_url" value="64-Lw==" id="return_url">
+
+<input type="hidden" name="email" value="" id="email">
+
+<input type="hidden" name="email_field" value="cWxqalRHSjgycA==" id="email_field"></div></div></div></form></div>
+</div>
+</div>
+</div>
+          </div>
+  </div>
+  <div id="global_footer">
+    <div class="layout_page_footer">
+<div class="generic_layout_container layout_main">
+<div class="generic_layout_container layout_core_menu_footer">
+Copyright ©2025  &nbsp;-&nbsp; <a href="https://warmerise.com/help/privacy" class="menu_core_footer core_footer_privacy" order="1" encodeurl="1">Privacy</a>  &nbsp;-&nbsp; <a href="https://warmerise.com/help/terms" class="menu_core_footer core_footer_terms" order="2" encodeurl="1">Terms of Service</a>  &nbsp;-&nbsp; <a href="https://warmerise.com/help/contact" class="menu_core_footer core_footer_contact" order="3" encodeurl="1">Contact</a>  &nbsp;-&nbsp; <a href="https://warmerise.com/login/return_url/64-Lw%3D%3D?mobile=1" enabled="1" class="menu_core_footer core_footer_mobile" order="4" uri="/login/return_url/64-Lw%3D%3D?mobile=1">Mobile Site</a>  &nbsp;-&nbsp; <a href="https://warmerise.com/pages/Demo" enabled="1" class="menu_core_footer custom_210" order="7" uri="/pages/Demo">Warmerise On Your Site</a>  &nbsp;-&nbsp; <a href="https://warmerise.com/store" enabled="1" class="menu_core_footer custom_309" order="8" uri="/store">Store</a>
+
+</div>
+</div>
+</div>
+  </div>
+  
+</body></html>

